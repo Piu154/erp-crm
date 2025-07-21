@@ -6,55 +6,41 @@ import { useNavigate } from 'react-router-dom';
 import useLanguage from '@/locale/useLanguage';
 
 import { Form, Button,message } from 'antd';
-
-import { login } from '@/redux/auth/actions';
+import { Link } from 'react-router-dom';
+import { login, register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
 import LoginForm from '@/forms/LoginForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
-import { Link } from 'react-router-dom';
-import {  isLoggedIn as selectIsLoggedIn } from '@/redux/auth/selectors';
+import SignUpForm from '@/forms/SignUpForm';
+import { signup } from '@/auth';
 
-const LoginPage = () => {
+const SignUp = () => {
   const translate = useLanguage();
-  const { isLoading, isSuccess, current } = useSelector(selectAuth);
-  console.log('Full current:', current);
-  
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  
-
+  const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
   // const size = useSize();
 
   const dispatch = useDispatch();
-  
   const onFinish = async (values) => {
-    // console.log("📤 Submitting login values:", values);
-
-    const result = await dispatch(login({ loginData: values }));
+    console.log("🟡 Dispatching signup with →", values);
+    const result = await dispatch(signup({ signupData: values }));
   
-    // console.log("🔥 Login result →", result);
+    console.log("🔥 Signup result →", result);
   
     if (result.success) {
-      message.success("Login successful!");
+      message.success("Signup successful!");
+      navigate("/"); // or wherever you want
     } else {
-      message.error(result.message || "Invalid credentials");
+      message.error(result.message || "Signup failed.");
     }
   };
   
   
-
   
   useEffect(() => {
-    // console.log("Effect Triggered →", { isSuccess, isLoggedIn, current });
-    if (isSuccess && isLoggedIn && current?.token) {
-      navigate('/');
-    }
-  }, [isSuccess, isLoggedIn, current]);
-  
-  
-  
-  
+    if (isSuccess) navigate('/');
+  }, [isSuccess]);
 
   const FormContainer = () => {
     return (
@@ -68,7 +54,7 @@ const LoginPage = () => {
           }}
           onFinish={onFinish}
         >
-          <LoginForm />
+          <SignUpForm/>
           <Form.Item>
             <Button
               type="primary"
@@ -77,20 +63,24 @@ const LoginPage = () => {
               loading={isLoading}
               size="large"
             >
-              {translate('Log in')}
+              {translate('Sign Up')}
             </Button>
+              <Form.Item>
+        {/* <button type="submit" className="ant-btn ant-btn-primary ant-btn-lg" style={{ width: '100%' }}>
+          Sign Up
+        </button> */}
+      </Form.Item>
           </Form.Item>
-          
-      <div style={{ textAlign: 'center',  }}>
-        <span>{translate("Don't have an account?")} </span>
-        <Link to="/signup">{translate('Sign up')}</Link>
-      </div>
+          <div style={{ textAlign: 'center' }}>
+          <span>{translate('Already have an account?')} </span>
+          <Link to="/login">{translate('Sign in')}</Link>
+        </div>
         </Form>
       </Loading>
     );
   };
 
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
+  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign Up" />;
 };
 
-export default LoginPage;
+export default SignUp; 

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+ // 🔸 Make sure this is imported
 
 import useLanguage from '@/locale/useLanguage';
 
 export default function LoginForm() {
   const translate = useLanguage();
+
   return (
     <div>
       <Form.Item
@@ -27,6 +29,7 @@ export default function LoginForm() {
           size="large"
         />
       </Form.Item>
+
       <Form.Item
         label={translate('password')}
         name="password"
@@ -51,6 +54,8 @@ export default function LoginForm() {
           {translate('Forgot password')}
         </a>
       </Form.Item>
+
+     
     </div>
   );
 }

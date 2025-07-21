@@ -5,7 +5,9 @@ const INITIAL_STATE = {
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,
+  error: null,
 };
+
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -14,9 +16,15 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLoggedIn: false,
         isLoading: true,
+        isSuccess: false, // ✅ Important!
       };
-    case actionTypes.REQUEST_FAILED:
-      return INITIAL_STATE;
+    
+      case actionTypes.REQUEST_FAILED:
+        return {
+          ...INITIAL_STATE,
+          error: 'Invalid credentials',
+        };
+      
 
     case actionTypes.REQUEST_SUCCESS:
       return {

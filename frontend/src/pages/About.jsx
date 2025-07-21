@@ -1,29 +1,26 @@
 import { Button, Result } from 'antd';
-
 import useLanguage from '@/locale/useLanguage';
 
 const About = () => {
   const translate = useLanguage();
+
   return (
     <Result
       status="info"
-      title={'IDURAR'}
-      subTitle={translate('Do you need help on customize of this app')}
+      title={'AdminiqERP'}
+      subTitle={translate('Manage your business smarter with AdminiqERP.')}
       extra={
         <>
           <p>
-            Website : <a href="https://www.idurarapp.com">www.idurarapp.com</a>{' '}
+            Website : <a href="#">(coming soon)</a>
           </p>
           <p>
-            GitHub :{' '}
-            <a href="https://github.com/idurar/idurar-erp-crm">
-              https://github.com/idurar/idurar-erp-crm
-            </a>
+            GitHub : <a href="#">(repository link coming soon)</a>
           </p>
           <Button
             type="primary"
             onClick={() => {
-              window.open(`https://www.idurarapp.com/contact-us/`);
+              window.open('#');
             }}
           >
             {translate('Contact us')}

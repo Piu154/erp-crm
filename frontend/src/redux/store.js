@@ -1,31 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import lang from '@/locale/translation/en_us';
-
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './rootReducer';
-import storePersist from './storePersist';
 
-// localStorageHealthCheck();
-
-const AUTH_INITIAL_STATE = {
-  current: {},
-  isLoggedIn: false,
-  isLoading: false,
-  isSuccess: false,
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'],
 };
 
-const auth_state = storePersist.get('auth') ? storePersist.get('auth') : AUTH_INITIAL_STATE;
-
-const initialState = { auth: auth_state };
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: initialState,
-  devTools: import.meta.env.PROD === false, // Enable Redux DevTools in development mode
+  reducer: persistedReducer,
+  devTools: import.meta.env.PROD === false,
 });
 
-console.log(
-  '🚀 Welcome to IDURAR ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
-);
-
+export const persistor = persistStore(store);
 export default store;

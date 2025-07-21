@@ -257,6 +257,7 @@ module.exports = {
   partially: 'Partially',
   paid: 'Paid',
   sign_in: 'Sign In',
+  sign_up:'Sign Up,',
   log_in: 'Log In',
   register_now: 'Register Now',
   remember_me: 'Remember Me',

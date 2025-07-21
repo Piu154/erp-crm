@@ -13,16 +13,29 @@ function findKeyByPrefix(object, prefix) {
   }
 }
 
+import store from '@/redux/store'; // Adjust import as needed
+
 function includeToken() {
   axios.defaults.baseURL = API_BASE_URL;
-
   axios.defaults.withCredentials = true;
-  const auth = storePersist.get('auth');
 
-  if (auth) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${auth.current.token}`;
+  try {
+    const state = store.getState();
+    const token = state.auth?.current?.result?.accessToken;
+
+    // console.log("✅ Real-time token from Redux store:", token);
+
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common["Authorization"];
+    }
+  } catch (err) {
+    console.error("❌ Failed to load token from store", err);
+    delete axios.defaults.headers.common["Authorization"];
   }
 }
+
 
 const request = {
   create: async ({ entity, jsonData }) => {

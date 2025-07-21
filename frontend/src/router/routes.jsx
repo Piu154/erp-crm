@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
-
+const SignUp = lazy(() => import('@/pages/SignUp.jsx'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Customer = lazy(() => import('@/pages/Customer'));
 const Invoice = lazy(() => import('@/pages/Invoice'));
@@ -35,6 +35,10 @@ let routes = {
     {
       path: '/login',
       element: <Navigate to="/" />,
+    },
+    {
+       path:"/signup",
+       element:<SignUp/>
     },
     {
       path: '/logout',
