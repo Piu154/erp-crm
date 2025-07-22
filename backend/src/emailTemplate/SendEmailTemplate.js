@@ -62,7 +62,7 @@ exports.SendOffer = ({ title = 'Offer from Idurar', name = '', time = new Date()
 };
 
 exports.SendPaymentReceipt = ({
-  title = 'Payment Receipt from Idurar',
+  title = 'Payment Receipt from AdminIq erp',
   name = '',
   time = new Date(),
 }) => {

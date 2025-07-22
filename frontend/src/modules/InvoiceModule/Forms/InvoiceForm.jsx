@@ -20,11 +20,11 @@ import { useSelector } from 'react-redux';
 import SelectAsync from '@/components/SelectAsync';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
-  const { last_invoice_number } = useSelector(selectFinanceSettings);
+  // const { last_invoice_number } = useSelector(selectFinanceSettings);
 
-  if (last_invoice_number === undefined) {
-    return <></>;
-  }
+  // if (last_invoice_number === undefined) {
+  //   return <></>;
+  // }
 
   return <LoadInvoiceForm subTotal={subTotal} current={current} />;
 }
@@ -32,12 +32,13 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
 function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const translate = useLanguage();
   const { dateFormat } = useDate();
-  const { last_invoice_number } = useSelector(selectFinanceSettings);
+  // const { last_invoice_number } = useSelector(selectFinanceSettings);
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
-  const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+  // const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+  const [lastNumber, setLastNumber] = useState(() => 0 + 1);
 
   const handelTaxChange = (value) => {
     setTaxRate(value / 100);
