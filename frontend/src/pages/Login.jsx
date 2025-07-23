@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useLanguage from '@/locale/useLanguage';
 
-import { Form, Button,message } from 'antd';
+import { Form, Button,message, Alert } from 'antd';
 
 import { login } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
@@ -59,6 +59,15 @@ const LoginPage = () => {
   const FormContainer = () => {
     return (
       <Loading isLoading={isLoading}>
+        <div style={{ marginBottom: 16 }}>
+          <Alert
+            message="Use test credentials → Email: test@test.com | Password: Test@123"
+            type="info"
+            showIcon
+            banner
+          />
+        </div>
+  
         <Form
           layout="vertical"
           name="normal_login"
@@ -80,15 +89,16 @@ const LoginPage = () => {
               {translate('Log in')}
             </Button>
           </Form.Item>
-          
-      <div style={{ textAlign: 'center',  }}>
-        <span>{translate("Don't have an account?")} </span>
-        <Link to="/signup">{translate('Sign up')}</Link>
-      </div>
+  
+          <div style={{ textAlign: 'center' }}>
+            <span>{translate("Don't have an account?")} </span>
+            <Link to="/signup">{translate('Sign up')}</Link>
+          </div>
         </Form>
       </Loading>
     );
   };
+  
 
   return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Sign in" />;
 };
