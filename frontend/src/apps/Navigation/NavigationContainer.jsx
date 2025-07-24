@@ -7,7 +7,7 @@ import { useAppContext } from '@/context/appContext';
 import useLanguage from '@/locale/useLanguage';
 import logoIcon from '@/style/images/logo-icon.svg';
 import logoText from '@/style/images/logo-text.svg';
-
+import logo from '@/style/images/idurar-crm-erp.svg';
 import useResponsive from '@/hooks/useResponsive';
 
 import {
@@ -151,11 +151,11 @@ function Sidebar({ collapsible, isMobile = false }) {
           cursor: 'pointer',
         }}
       >
-        <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
+        <img src={logo} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
 
-        {!showLogoApp && (
+        {/* {!showLogoApp && (
           <img
-            src={logoText}
+            src={logo}
             alt="Logo"
             style={{
               marginTop: '3px',
@@ -163,7 +163,7 @@ function Sidebar({ collapsible, isMobile = false }) {
               height: '38px',
             }}
           />
-        )}
+        )} */}
       </div>
       <Menu
         items={items}
